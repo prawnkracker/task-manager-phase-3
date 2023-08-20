@@ -24,3 +24,19 @@ class User(Base):
         return f'User (ID: {self.id}, ' + \
             f'Name: {self.name}, ' + \
             f'Age: {self.age})'
+
+class Task(Base):
+    __tablename__ = 'tasks'
+
+    id=Column(Integer(), primary_key=True)
+    todo=Column(String())
+    completed=Column(Boolean(), default=False)
+    date_added=Column(DateTime(),default=datetime.now())
+    user_id=Column(Integer(), ForeignKey('users.id'))
+
+    def __repr__(self):
+        return f'Task (ID: {self.id}, ' + \
+            f'ToDo: {self.todo}, ' + \
+            f'Completed: {self.completed}, ' + \
+            f'Date Added: {self.date_added}, ' + \
+            f'User ID: {self.user_id})'
