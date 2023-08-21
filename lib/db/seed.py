@@ -19,12 +19,13 @@ def delete_records():
 def create_records():
     users = [User(
         name=f'{fake.name()}',
-        age=random.randint(16, 65)
+        age=random.randint(16, 65),
     ) for i in range(10)]
 
     tasks = [Task(
         todo=f'{fake.sentence(nb_words=6)}',
-        completed= random.choice([True, False])
+        completed= random.choice([True, False]),
+        user_id=random.randint(1, 10)
     ) for i in range(30)]
     
     session.add_all(users + tasks)
