@@ -20,14 +20,18 @@ def create_records():
     users = [User(
         name=f'{fake.name()}',
         age=random.randint(16, 65),
-    ) for i in range(10)]
+    ) for _ in range(10)]
 
     tasks = [Task(
         todo=f'{fake.sentence(nb_words=6)}',
         completed= random.choice([True, False]),
-        user_id=random.randint(1, 10)
-    ) for i in range(30)]
+        user_id=random.randint(1, len(users))
+    ) for _ in range(30)]
     
     session.add_all(users + tasks)
     session.commit()
     return users, tasks
+
+def relate_records(users, tasks):
+    for task in tasks:
+        task.user = random.choice(users)
