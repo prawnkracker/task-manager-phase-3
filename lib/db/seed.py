@@ -24,7 +24,7 @@ def create_records():
 
     tasks = [Task(
         todo=f'{fake.sentence(nb_words=6)}',
-        completed= random.choice([True, False]),
+        completed= random.choice(["✓", "✕"]),
         user_id=random.randint(1, 10)
     ) for _ in range(30)]
 

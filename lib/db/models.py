@@ -30,7 +30,7 @@ class Task(Base):
 
     id=Column(Integer(), primary_key=True)
     todo=Column(String())
-    completed=Column(Boolean(), default=False)
+    completed=Column(String(), default="✕")
     date_added=Column(DateTime(),default=datetime.now())
     user_id=Column(Integer(), ForeignKey('users.id'))
 
