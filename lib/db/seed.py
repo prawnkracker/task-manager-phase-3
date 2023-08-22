@@ -25,9 +25,9 @@ def create_records():
     tasks = [Task(
         todo=f'{fake.sentence(nb_words=6)}',
         completed= random.choice([True, False]),
-        user_id=random.randint(1, len(users))
+        user_id=random.randint(1, 10)
     ) for _ in range(30)]
-    
+
     session.add_all(users + tasks)
     session.commit()
     return users, tasks
@@ -35,3 +35,14 @@ def create_records():
 def relate_records(users, tasks):
     for task in tasks:
         task.user = random.choice(users)
+    
+    session.add_all(tasks)
+    session.commit()
+
+if __name__ == "__main__":
+    delete_records()
+    users, tasks = create_records()
+    relate_records(users, tasks)
+
+    session.close()
+    session.commit()
