@@ -20,6 +20,19 @@ class TaskManager:
         print("Press D to delete entries!")
         print("")
         print("Press X to exit the CLI!")
+        selection = input("Please select an option.")
+        if selection == "C" or selection == "c":
+            TaskManager.create_function(self, selection)
+        elif selection == "R" or selection == "r":
+            TaskManager.read_function(self, selection)
+        elif selection == "U" or selection == "u":
+            TaskManager.update_function(self, selection)
+        elif selection == "D" or selection == "d":
+            TaskManager.delete_function(self, selection)
+        elif selection == "X" or selection == "x":
+            break
+        else:
+            print("Please select one of the following options: C, R, U, D or X to exit.")
 
 if __name__ == "__main__":
     engine = create_engine("sqlite:///db/tasks_manager.db")
