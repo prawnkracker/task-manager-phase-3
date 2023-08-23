@@ -5,4 +5,5 @@ from db.models import User, Task
 
 
 if __name__ == "__main__":
-    pass
+    engine = create_engine("sqlite:///db/tasks_manager.db")
+    session = Session(engine)
