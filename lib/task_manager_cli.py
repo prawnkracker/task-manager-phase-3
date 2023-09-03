@@ -2,6 +2,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 from db.models import User, Task
+from datetime import datetime
 
 class TaskManager:
     def __init__(self):
@@ -65,9 +66,27 @@ class TaskManager:
                         session.commit()
                     except ValueError:
                         print("Please enter a valid age.")
-                        print("")
-            
-                
+
+            elif choice == "T" or choice == "t":
+                while choice:
+                    print("Continue to add new task to database or press X to exit!")
+                    new_task = input("Enter new task: ")
+                    if new_task == "X" or new_task == "x":
+                        break
+                    try:
+                        date_added = datetime.now()
+                        print(f'Task: {new_task} | Date Added: {date_added}')
+                        user_id = int(input("Enter the id of the user this task belongs to: "))
+                        if user_id in range(1, (len(self.users) +1)):
+                            print(f'Task: {new_task} | Date Added: {date_added} | User Id: {user_id}')
+                            session.add(Task(todo=new_task, date_added=date_added, user_id=user_id))
+                            session.commit()
+                        else:
+                            print("There is no user with that ID.")
+                    except ValueError:
+                        print("Please enter a valid number for User ID")
+
+
                     
 
 
