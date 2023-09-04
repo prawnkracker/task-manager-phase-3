@@ -31,6 +31,7 @@ class TaskManager:
             while selection:
                 if selection == "C" or selection == "c":
                     self.create_function()
+                    selection = ''
                 elif selection == "R" or selection == "r":
                     self.read_function(self, selection)
                 elif selection == "U" or selection == "u":
@@ -38,7 +39,7 @@ class TaskManager:
                 elif selection == "D" or selection == "d":
                     self.delete_function(self, selection)
                 elif selection == "X" or selection == "x":
-                    break
+                    return
                 else:
                     print("Please select one of the following options: C, R, U, D or X to exit.")
     
@@ -54,7 +55,7 @@ class TaskManager:
             choice = input("Selected option: ")
         
             if choice == "U" or choice=="u":
-                while choice:
+                while True:
                     print("Continue to add new user to database or press X to exit!")
                     new_user= input("Enter new user's name: ")
                     if new_user == "X" or new_user=='x':
@@ -66,9 +67,10 @@ class TaskManager:
                         session.commit()
                     except ValueError:
                         print("Please enter a valid age.")
+                        print("#########################")
 
             elif choice == "T" or choice == "t":
-                while choice:
+                while True:
                     print("Continue to add new task to database or press X to exit!")
                     new_task = input("Enter new task: ")
                     if new_task == "X" or new_task == "x":
@@ -83,8 +85,17 @@ class TaskManager:
                             session.commit()
                         else:
                             print("There is no user with that ID.")
+                            print("##############################")
                     except ValueError:
                         print("Please enter a valid number for User ID")
+                        print("#######################################")
+            
+            elif choice == "X" or choice == "x":
+                break
+
+            else:
+                print("Invalid input -- please choose U, T or X to exit.")
+                print("#################################################")
 
 
                     
