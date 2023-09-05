@@ -33,7 +33,7 @@ class TaskManager:
                     self.create_function()
                     selection = ''
                 elif selection == "R" or selection == "r":
-                    self.read_function(self, selection)
+                    self.read_function()
                 elif selection == "U" or selection == "u":
                     self.update_function(self, selection)
                 elif selection == "D" or selection == "d":
@@ -47,9 +47,9 @@ class TaskManager:
         while True:
             print("What would you like to create?")
             print("")
-            print("Press U to create a new user!")
-            print("Press T to create a new task!")
-            print("Or press X to exit back to the starting page!")
+            print("Press U to create a new user.")
+            print("Press T to create a new task.")
+            print("Or press X to exit back to the starting page.")
             print("")
         
             choice = input("Selected option: ")
@@ -96,6 +96,21 @@ class TaskManager:
             else:
                 print("Invalid input -- please choose U, T or X to exit.")
                 print("#################################################")
+
+    def read_function(self):
+        while True:
+            print("What would you like to see from the databases?")
+            print("")
+            print("Press U to view all users.")
+            print("Press T to view all tasks.")
+            print("Press S to view user by ID.")
+            print("Press A to view a user's tasks by user ID.")
+            print("Or press X to exit back to the starting page.")
+            print("")
+
+            search = input("What would you like to see?")
+
+            print(search)
 
 
                     
