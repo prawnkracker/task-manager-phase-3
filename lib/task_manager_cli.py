@@ -34,10 +34,11 @@ class TaskManager:
                     selection = ''
                 elif selection == "R" or selection == "r":
                     self.read_function()
+                    selection = ''
                 elif selection == "U" or selection == "u":
-                    self.update_function(self, selection)
+                    self.update_function()
                 elif selection == "D" or selection == "d":
-                    self.delete_function(self, selection)
+                    self.delete_function()
                 elif selection == "X" or selection == "x":
                     return
                 else:
@@ -110,8 +111,12 @@ class TaskManager:
 
             search = input("What would you like to see?")
 
-            print(search)
-
+            if search == 'X' or search == 'x':
+                break
+            
+            elif search == 'U' or search =='u':
+                all_users = session.query(User).all()
+                print(all_users)
 
                     
 
