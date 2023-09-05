@@ -111,14 +111,20 @@ class TaskManager:
 
             search = input("What would you like to see?")
 
-            if search == 'X' or search == 'x':
+            if search == "X" or search == "x":
                 break
             
-            elif search == 'U' or search =='u':
+            elif search == "U" or search =="u":
                 all_users = self.session.query(User).all()
                 for user in all_users:
                     print(f"User ID: {user.id} | Name: {user.name} | Age: {user.age}")
                     print("-------------------------------------------------------")
+            
+            elif search == "T" or search == "t":
+                all_tasks = session.query(Task).all()
+                for task in all_tasks:
+                    print(f"Task: {task.todo} | Completed: {task.completed} | Date Added: {task.date_added} | User ID: {task.user_id}")
+                    print("-------------------------------------------------------------------------------------------------------------")
 
                     
 
