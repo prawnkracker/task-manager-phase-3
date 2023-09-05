@@ -21,7 +21,7 @@ class User(Base):
     tasks = relationship('Task', backref=backref('users'))
 
     def __repr__(self):
-        return f'User ID: {self.id}, ' + \
+        return f'(User ID: {self.id}, ' + \
             f'Name: {self.name}, ' + \
             f'Age: {self.age})'
 

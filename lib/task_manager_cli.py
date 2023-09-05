@@ -115,8 +115,10 @@ class TaskManager:
                 break
             
             elif search == 'U' or search =='u':
-                all_users = session.query(User).all()
-                print(all_users)
+                all_users = self.session.query(User).all()
+                for user in all_users:
+                    print(f"User ID: {user.id} | Name: {user.name} | Age: {user.age}")
+                    print("-------------------------------------------------------")
 
                     
 
