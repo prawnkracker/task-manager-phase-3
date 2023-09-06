@@ -127,11 +127,25 @@ class TaskManager:
                     print("-------------------------------------------------------------------------------------------------------------")
 
             elif search == "S" or search == "s":
-                search_id = input("What is the user's ID that you would like to see?")
-                find_user = session.query(User).filter(User.id == search_id)
-                for user in find_user:
-                    print(f"User ID: {user.id} | Name: {user.name} | Age: {user.age}")
-                    print("-------------------------------------------------------")
+                search_id = input("What is the user's ID that you would like to see? ")
+                
+                try:
+                    user_id = int(search_id)
+                except ValueError:
+                    print("Please enter a valid integer for User ID.")
+                    continue
+
+                if user_id not in [user.id for user in self.users]:
+                    print("not a valid user id")
+                else:
+                    find_user = session.query(User).filter(User.id == user_id)
+                    for user in find_user:
+                        print(f"User ID: {user.id} | Name: {user.name} | Age: {user.age}")
+                        print("-------------------------------------------------------")
+            
+            elif search == "A" or search == 'a':
+                search_by_id = input("What is the user's ID? ")
+                
 
 
 if __name__ == "__main__":
