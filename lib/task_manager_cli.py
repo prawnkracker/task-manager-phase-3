@@ -109,7 +109,7 @@ class TaskManager:
             print("Or press X to exit back to the starting page.")
             print("")
 
-            search = input("What would you like to see?")
+            search = input("Selected option: ")
 
             if search == "X" or search == "x":
                 break
@@ -126,7 +126,12 @@ class TaskManager:
                     print(f"Task: {task.todo} | Completed: {task.completed} | Date Added: {task.date_added} | User ID: {task.user_id}")
                     print("-------------------------------------------------------------------------------------------------------------")
 
-                    
+            elif search == "S" or search == "s":
+                search_id = input("What is the user's ID that you would like to see?")
+                find_user = session.query(User).filter(User.id == search_id)
+                for user in find_user:
+                    print(f"User ID: {user.id} | Name: {user.name} | Age: {user.age}")
+                    print("-------------------------------------------------------")
 
 
 if __name__ == "__main__":
