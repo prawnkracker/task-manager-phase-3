@@ -69,7 +69,7 @@ class TaskManager:
                         session.commit()
                     except ValueError:
                         print("Please enter a valid age.")
-                        print("#########################")
+                        print("---------------------------")
 
             elif choice == "T" or choice == "t":
                 while True:
@@ -87,17 +87,17 @@ class TaskManager:
                             session.commit()
                         else:
                             print("There is no user with that ID.")
-                            print("##############################")
+                            print("-------------------------------------------------------")
                     except ValueError:
                         print("Please enter a valid number for User ID")
-                        print("#######################################")
+                        print("-------------------------------------------------------")
             
             elif choice == "X" or choice == "x":
                 break
 
             else:
                 print("Invalid input -- please choose U, T or X to exit.")
-                print("#################################################")
+                print("-------------------------------------------------------")
 
     def read_function(self):
         while True:
