@@ -145,7 +145,25 @@ class TaskManager:
             
             elif search == "A" or search == 'a':
                 search_by_id = input("What is the user's ID? ")
-                
+                try:
+                    user_id = int(search_by_id)
+                except ValueError:
+                    print("Please enter a valid Integer for User ID")
+
+                user = session.query(User).filter(User.id == int(search_by_id)).first()
+
+                if user is None:
+                    print('User not found')
+                else:
+                    user_tasks = session.query(Task).filter(Task.user_id == user_id).all()
+
+                    if user_tasks:
+                        print(f"Tasks for User ID: {user.id} | Name: {user.name} | Age: {user.age}")
+                        for task in user_tasks:
+                            print(f"Task: {task.todo} | Completed: {task.completed} | Date Added: {task.date_added}")
+                        print(f"Total Tasks: {len(user_tasks)}")   
+                    else:
+                        print(f"No tasks found for User ID: {user.id} | Name: {user.name} | Age: {user.age}")      
 
 
 if __name__ == "__main__":
