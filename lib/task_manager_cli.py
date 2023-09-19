@@ -37,6 +37,7 @@ class TaskManager:
                     selection = ''
                 elif selection == "U" or selection == "u":
                     self.update_function()
+                    selection = ''
                 elif selection == "D" or selection == "d":
                     self.delete_function()
                 elif selection == "X" or selection == "x":
@@ -159,11 +160,18 @@ class TaskManager:
 
                     if user_tasks:
                         print(f"Tasks for User ID: {user.id} | Name: {user.name} | Age: {user.age}")
+                        print("-------------------------------------------------------")
                         for task in user_tasks:
                             print(f"Task: {task.todo} | Completed: {task.completed} | Date Added: {task.date_added}")
+                            print("-------------------------------------------------------------------------------")
                         print(f"Total Tasks: {len(user_tasks)}")   
                     else:
                         print(f"No tasks found for User ID: {user.id} | Name: {user.name} | Age: {user.age}")      
+        
+    def update_function(self):
+        while True:
+            print("What would you like to update from the database?")
+            print
 
 
 if __name__ == "__main__":
