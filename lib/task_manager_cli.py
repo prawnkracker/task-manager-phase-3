@@ -171,7 +171,11 @@ class TaskManager:
     def update_function(self):
         while True:
             print("What would you like to update from the database?")
-            print
+            print("")
+            print("Press U to update a user entry.")
+            print("Press T to update a task entry.")
+            print("Press X to exit back to the starting page.")
+            print("")
 
 
 if __name__ == "__main__":
