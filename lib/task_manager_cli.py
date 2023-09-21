@@ -177,6 +177,26 @@ class TaskManager:
             print("Press X to exit back to the starting page.")
             print("")
 
+            user_choice = input("Selected option: ")
+
+            if user_choice == "X" or user_choice == "x":
+                break
+            
+            elif user_choice == "U" or user_choice == "u":
+                search_by_id = input("What is the user's ID that you would like to update? ")
+                try:
+                    user_id = int(search_by_id)
+                except ValueError:
+                    print("Please enter a valid integer for User ID.")
+                
+                user = session.query(User).filter(User.id == user_id).first()
+
+                if user is None:
+                    print("User not found")
+                else:
+                    print(user)
+            
+
 
 if __name__ == "__main__":
     engine = create_engine("sqlite:///db/tasks_manager.db")
