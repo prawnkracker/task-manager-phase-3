@@ -40,6 +40,7 @@ class TaskManager:
                     selection = ''
                 elif selection == "D" or selection == "d":
                     self.delete_function()
+                    selection = ''
                 elif selection == "X" or selection == "x":
                     return
                 else:
@@ -283,7 +284,36 @@ class TaskManager:
                 print(f"Task ID: {task.id} | Task: {task.todo} | Completed: {task.completed} | Date Added: {task.date_added}")
                 print("-----------------------------------------------------------------------------------------------------")
 
+    def delete_function(self):
+        while True:
+            print("What would you like to delete from the database?")
+            print("")
+            print("Press U to delete a user.")
+            print("Press T to delete a task.")
+            print("Or press X to return to the starting page.")
+            print("")
 
+            choice = input("Selected option: ")
+
+            if choice == "U" or choice == "u":
+                users = session.query(User).all()
+                for user in users:
+                    print(f"User ID: {user.id} | Name: {user.name} | Age: {user.age}")
+                    print("-------------------------------------------------------")
+                print("What is the user ID of the user you would like to delete from the data base?")
+                user_id = input("User ID: ")
+                try:
+                    user_id_int = int(user_id)
+                    user = session.query(User.id == user_id_int).first()
+                    if user is None:
+                        print("No user found with that ID")
+                        print("--------------------------")
+                    else:
+                        session.delete(user)
+                        session.commit()
+                except ValueError:
+                    print("Please enter a valid ID")
+                    print("-----------------------")
 if __name__ == "__main__":
     engine = create_engine("sqlite:///db/tasks_manager.db")
     session = Session(engine)
