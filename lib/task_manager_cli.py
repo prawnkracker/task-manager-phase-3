@@ -234,9 +234,35 @@ class TaskManager:
                     print("Invalid input -- please choose N, A or X to exit.")
                     print("-------------------------------------------------------")
 
-            
+            elif user_choice == "T" or user_choice == "t":
+                task_list = session.query(Task).all()
+                for task in task_list:
+                    print(f"Task ID: {task.id} | Task: {task.todo} | Completed: {task.completed} | Date Added: {task.date_added}")
+                task_id = input("What is the task ID of the task you would like to update? ")
 
-            
+                try:
+                    task_id_int = int(task_id)
+                    task = session.query(Task).filter(Task.id == task_id_int).first()
+                    print(f"Task ID: {task.id} | Task: {task.todo} | Completed: {task.completed} | Date Added: {task.date_added}")
+                except ValueError:
+                    print("Please enter a valid integer for task ID.")
+                    print("-------------------------------------------------------")
+                
+                print("What would you like to update from this task?")
+                print("")
+                print("Press T to update the task.")
+                print("Press C to update the completion status.")
+                print("Or press X to exit to the previous page.")
+
+                choice = input("Selected option: ")
+
+                if choice == "X" or choice == "x":
+                    break
+                elif choice == "T" or choice == "t":
+                    update_task = input("What would you like to update the task to? ")
+                    task.todo = update_task
+                    session.commit()
+                    print(f"Task ID: {task.id} | Task: {task.todo} | Completed: {task.completed} | Date Added: {task.date_added}")
 
 
 if __name__ == "__main__":
