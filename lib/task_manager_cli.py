@@ -125,7 +125,7 @@ class TaskManager:
             elif search == "T" or search == "t":
                 all_tasks = session.query(Task).all()
                 for task in all_tasks:
-                    print(f"Task: {task.todo} | Completed: {task.completed} | Date Added: {task.date_added} | User ID: {task.user_id}")
+                    print(f"Task ID: {task.id} | Task: {task.todo} | Completed: {task.completed} | Date Added: {task.date_added}")
                     print("-------------------------------------------------------------------------------------------------------------")
 
             elif search == "S" or search == "s":
@@ -238,12 +238,18 @@ class TaskManager:
                 task_list = session.query(Task).all()
                 for task in task_list:
                     print(f"Task ID: {task.id} | Task: {task.todo} | Completed: {task.completed} | Date Added: {task.date_added}")
+                    print("-----------------------------------------------------------------------------------------------------")
                 task_id = input("What is the task ID of the task you would like to update? ")
 
                 try:
                     task_id_int = int(task_id)
                     task = session.query(Task).filter(Task.id == task_id_int).first()
-                    print(f"Task ID: {task.id} | Task: {task.todo} | Completed: {task.completed} | Date Added: {task.date_added}")
+                    if task is None:
+                        print("No task found with that ID.")
+                        print("----------------------------")
+                    else:
+                        print(f"Task ID: {task.id} | Task: {task.todo} | Completed: {task.completed} | Date Added: {task.date_added}")
+                        print("-----------------------------------------------------------------------------------------------------")
                 except ValueError:
                     print("Please enter a valid integer for task ID.")
                     print("-------------------------------------------------------")
@@ -263,6 +269,17 @@ class TaskManager:
                     task.todo = update_task
                     session.commit()
                     print(f"Task ID: {task.id} | Task: {task.todo} | Completed: {task.completed} | Date Added: {task.date_added}")
+                    print("-------------------------------------------------------")
+                elif choice == "C" or choice == "c":
+                    is_completed = input("Is this task completed? (Y/N)")
+                    if is_completed == "Y" or is_completed == "y":
+                        task.completed = "✓"
+                        session.commit()
+                    elif is_completed == "N" or is_completed == "n":
+                        task.completed = "✕"
+                        session.commit()
+                else:
+                    print("Invalid input -- please choose T or C or X to exit the previous page.")
 
 
 if __name__ == "__main__":
