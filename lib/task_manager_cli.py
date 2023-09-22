@@ -270,7 +270,7 @@ class TaskManager:
                     task.todo = update_task
                     session.commit()
                     print(f"Task ID: {task.id} | Task: {task.todo} | Completed: {task.completed} | Date Added: {task.date_added}")
-                    print("-------------------------------------------------------")
+                    print("-----------------------------------------------------------------------------------------------------")
                 elif choice == "C" or choice == "c":
                     is_completed = input("Is this task completed? (Y/N)")
                     if is_completed == "Y" or is_completed == "y":
@@ -281,8 +281,12 @@ class TaskManager:
                         session.commit()
                 else:
                     print("Invalid input -- please choose T or C or X to exit the previous page.")
+                    print("---------------------------------------------------------------------")
                 print(f"Task ID: {task.id} | Task: {task.todo} | Completed: {task.completed} | Date Added: {task.date_added}")
                 print("-----------------------------------------------------------------------------------------------------")
+            else:
+                print("Invalid input -- please choose U, T or X to exit the previous page.")
+                print("-------------------------------------------------------------------")
 
     def delete_function(self):
         while True:
@@ -311,9 +315,38 @@ class TaskManager:
                     else:
                         session.delete(user)
                         session.commit()
+                        print("User successfully deleted.")
                 except ValueError:
-                    print("Please enter a valid ID")
+                    print("Please enter a valid integer for user ID.")
                     print("-----------------------")
+
+            elif choice == "T" or choice == "t":
+                tasks = session.query(Task).all()
+                for task in tasks:
+                    print(f"Task ID: {task.id} | Task: {task.todo} | Completed: {task.completed} | Date Added: {task.date_added}")
+                    print("-----------------------------------------------------------------------------------------------------")
+                print("What is the ID of the task you would like to delete from the database?")
+                task_id = input("Task ID: ")
+                try:
+                    task_id_int = int(task_id)
+                    task = session.query(Task).filter(Task.id == task_id_int).first()
+                    if task is None:
+                        print("No task found with that ID.")
+                        print("---------------------------")
+                    else:
+                        session.delete(task)
+                        session.commit()
+                        print("Task successfully deleted.")
+                except ValueError:
+                    print("Please enter a valid integer for task ID.")
+            
+            elif choice == "X" or choice == "x":
+                break
+
+            else:
+                print("Invalid input -- please choose U, T or X to exit to the starting page.")
+
+                
 if __name__ == "__main__":
     engine = create_engine("sqlite:///db/tasks_manager.db")
     session = Session(engine)
