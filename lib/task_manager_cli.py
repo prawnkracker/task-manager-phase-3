@@ -44,6 +44,7 @@ class TaskManager:
                     return
                 else:
                     print("Please select one of the following options: C, R, U, D or X to exit.")
+                    selection = ''
     
     def create_function(self):
         while True:
@@ -166,7 +167,10 @@ class TaskManager:
                             print("-------------------------------------------------------------------------------")
                         print(f"Total Tasks: {len(user_tasks)}")   
                     else:
-                        print(f"No tasks found for User ID: {user.id} | Name: {user.name} | Age: {user.age}")      
+                        print(f"No tasks found for User ID: {user.id} | Name: {user.name} | Age: {user.age}")    
+            else:
+                print("Invalid input -- please choose U, T, S, A or X to exit.")
+                print("-------------------------------------------------------")  
         
     def update_function(self):
         while True:
@@ -193,8 +197,45 @@ class TaskManager:
 
                 if user is None:
                     print("User not found")
+                    print("-------------------------------------------------------") 
                 else:
-                    print(user)
+                    print(f"User ID: {user.id} | Name: {user.name} | Age: {user.age}")
+                    print("-------------------------------------------------------") 
+
+
+                print("What would you like to update?")
+                print("")
+                print("Press N to update the user's name.")
+                print("Press A to update the user's age.")
+                print("Or press X to exit to the previous page.")
+
+                update_selection = input("Selected option: ")
+
+                if update_selection == "N" or update_selection == "n":
+                    new_name = input("Enter the updated name: ")
+                    user.name = new_name
+                    session.commit()
+                    print(f"User ID: {user.id} | Name: {user.name} | Age: {user.age}")
+                    print("-------------------------------------------------------") 
+                elif update_selection == "A" or update_selection == "a":
+                    new_age = input("Enter the updated age: ")
+                    try:
+                        new_age_int = int(new_age)
+                        user.age = new_age_int
+                        session.commit()
+                        print(f"User ID: {user.id} | Name: {user.name} | Age: {user.age}")
+                        print("-------------------------------------------------------") 
+                    except ValueError:
+                        print("Please enter a valid integer for age.")
+                        print("-------------------------------------------------------") 
+                elif update_selection == "X" or update_selection == "x":
+                    break
+                else:
+                    print("Invalid input -- please choose N, A or X to exit.")
+                    print("-------------------------------------------------------")
+
+            
+
             
 
 
