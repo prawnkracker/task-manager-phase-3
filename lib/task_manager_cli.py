@@ -280,6 +280,8 @@ class TaskManager:
                         session.commit()
                 else:
                     print("Invalid input -- please choose T or C or X to exit the previous page.")
+                print(f"Task ID: {task.id} | Task: {task.todo} | Completed: {task.completed} | Date Added: {task.date_added}")
+                print("-----------------------------------------------------------------------------------------------------")
 
 
 if __name__ == "__main__":
