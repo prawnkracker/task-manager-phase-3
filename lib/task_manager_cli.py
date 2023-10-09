@@ -308,7 +308,7 @@ class TaskManager:
                 user_id = input("User ID: ")
                 try:
                     user_id_int = int(user_id)
-                    user = session.query(User.id == user_id_int).first()
+                    user = session.query(User).filter(User.id == user_id_int).first()
                     if user is None:
                         print("No user found with that ID")
                         print("--------------------------")
